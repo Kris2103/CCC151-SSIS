@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1219</width>
+    <height>710</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="EditProg">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>600</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>91</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #00674F;
+    color: white;
+    border: 2px solid #000000;
+    border-radius: 5px;
+     padding: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white; 
+}
+
+/ Hover effect for the button */
+QPushButton:hover {
+    background-color: #944E63;
+    border: 2px solid #944E63;
+}</string>
+    </property>
+    <property name="text">
+     <string>Edit</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="Genderline">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>260</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>141</width>
+      <height>21</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	padding: 1px;
+	box-shadow: 0 0 10px rgba(0,0,05);</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Female</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Male</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="AddProgram_2">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>600</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>91</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #00674F;
+    color: white;
+    border: 2px solid #000000;
+    border-radius: 5px;
+     padding: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white; 
+}
+
+/ Hover effect for the button */
+QPushButton:hover {
+    background-color: #944E63;
+    border: 2px solid #944E63;
+}</string>
+    </property>
+    <property name="text">
+     <string>Add</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="AddCollege">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>400</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <pointsize>12</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+    border: 2px solid #00674F;
+    border-radius: 10px;
+    padding: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: black;</string>
+    </property>
+    <property name="text">
+     <string>College</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="CollegeNameLine">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>510</y>
+      <width>181</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ProgramName_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>510</y>
+      <width>191</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ProgramName">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>490</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Program Name</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Lastnameline">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>210</y>
+      <width>301</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>301</width>
+      <height>21</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	padding: 1px;
+	box-shadow: 0 0 10px rgba(0,0,05);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="AddProgram">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>400</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <pointsize>12</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+    border: 2px solid #00674F;
+    border-radius: 10px;
+    padding: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: black;</string>
+    </property>
+    <property name="text">
+     <string>Program</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Gender">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>240</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Gender</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SaveStudent">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>370</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+QPushButton:hover {
+    background-color: #808080;
+    border: 2px solid #2980b9;
+}</string>
+    </property>
+    <property name="text">
+     <string>Update</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="FirstName">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>90</y>
+      <width>181</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>First Name</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="EditCollege">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>550</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>91</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #00674F;
+    color: white;
+    border: 2px solid #000000;
+    border-radius: 5px;
+     padding: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white; 
+}
+
+/ Hover effect for the button */
+QPushButton:hover {
+    background-color: #944E63;
+    border: 2px solid #944E63;
+}</string>
+    </property>
+    <property name="text">
+     <string>Edit</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="AddCollege_2">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>550</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>91</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #00674F;
+    color: white;
+    border: 2px solid #000000;
+    border-radius: 5px;
+     padding: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white; 
+}
+
+/ Hover effect for the button */
+QPushButton:hover {
+    background-color: #944E63;
+    border: 2px solid #944E63;
+}</string>
+    </property>
+    <property name="text">
+     <string>Add</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ProgramCode">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>440</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Program Code</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>40</y>
+      <width>771</width>
+      <height>621</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <widget class="QLineEdit" name="SearchLine">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>30</y>
+       <width>301</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>21</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: white;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	padding: 1px;
+	box-shadow: 0 0 10px rgba(0,0,05);</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Search">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>30</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>91</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #00674F;
+    color: white;
+    border: 2px solid #000000;
+    border-radius: 5px;
+     padding: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white; 
+}
+
+/ Hover effect for the button */
+QPushButton:hover {
+    background-color: #944E63;
+    border: 2px solid #944E63;
+}</string>
+     </property>
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
+    <widget class="QTabWidget" name="TabTable">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>761</width>
+       <height>561</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Students</string>
+      </attribute>
+      <widget class="QTableView" name="StudentTable">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>741</width>
+         <height>511</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Program</string>
+      </attribute>
+      <widget class="QTableView" name="ProgTable">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>741</width>
+         <height>511</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>College</string>
+      </attribute>
+      <widget class="QTableView" name="CollegeTable">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>741</width>
+         <height>511</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="DeleteButton">
+     <property name="geometry">
+      <rect>
+       <x>670</x>
+       <y>30</y>
+       <width>91</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QPushButton {
+    background-color: #c70000 ;
+    color: white;
+    border: 2px solid #000000;
+    border-radius: 5px;
+     padding: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white; 
+}</string>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="Searchby">
+     <property name="geometry">
+      <rect>
+       <x>145</x>
+       <y>30</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="FirstName_5">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>440</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>College Code</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="AddStudent">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>340</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>91</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #00674F;
+    color: white;
+    border: 2px solid #000000;
+    border-radius: 5px;
+     padding: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white; 
+}
+
+/ Hover effect for the button */
+QPushButton:hover {
+    background-color: #944E63;
+    border: 2px solid #944E63;
+}</string>
+    </property>
+    <property name="text">
+     <string>Add</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="Yearlevelline">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>310</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>141</width>
+      <height>21</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	padding: 1px;
+	box-shadow: 0 0 10px rgba(0,0,05);</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="CollegeCode">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>540</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>College Code</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Firstnameline">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>110</y>
+      <width>301</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>301</width>
+      <height>21</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	padding: 1px;
+	box-shadow: 0 0 10px rgba(0,0,05);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Middlenameline">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>160</y>
+      <width>301</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>301</width>
+      <height>21</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	padding: 1px;
+	box-shadow: 0 0 10px rgba(0,0,05);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="StudentProfile">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>50</y>
+      <width>301</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <pointsize>20</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+    border: 2px solid #00674F;
+    border-radius: 10px;
+    padding: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: black;</string>
+    </property>
+    <property name="text">
+     <string>Student Profile</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="IDline">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>260</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>141</width>
+      <height>21</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	padding: 1px;
+	box-shadow: 0 0 10px rgba(0,0,05);</string>
+    </property>
+    <property name="placeholderText">
+     <string>e.g. 2000-0000</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="MiddleName">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>140</y>
+      <width>181</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Middle Name</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SaveCollege">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>580</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+QPushButton:hover {
+    background-color: #808080;
+    border: 2px solid #2980b9;
+}</string>
+    </property>
+    <property name="text">
+     <string>Update</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="CourseCode">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>290</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Course Code</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="EditStudent">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>340</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>91</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #00674F;
+    color: white;
+    border: 2px solid #000000;
+    border-radius: 5px;
+     padding: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white; 
+}
+
+/ Hover effect for the button */
+QPushButton:hover {
+    background-color: #944E63;
+    border: 2px solid #944E63;
+}</string>
+    </property>
+    <property name="text">
+     <string>Edit</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ProgramCode_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>460</y>
+      <width>191</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="CourseComboBox">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>310</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>141</width>
+      <height>21</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	padding: 1px;
+	box-shadow: 0 0 10px rgba(0,0,05);</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SaveProg">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>630</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+QPushButton:hover {
+    background-color: #808080;
+    border: 2px solid #2980b9;
+}</string>
+    </property>
+    <property name="text">
+     <string>Update</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="FirstName_6">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>490</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>College Name</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="CollegeCodeCombbox">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>560</y>
+      <width>131</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="YearLevel">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>290</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Year Level</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LastName">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>190</y>
+      <width>181</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Last Name</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="CollegeCodeLine">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>460</y>
+      <width>181</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="IDnumber">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>240</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>I.D. Number</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1219</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
