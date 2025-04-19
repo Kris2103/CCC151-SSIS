@@ -1,0 +1,16 @@
+debug/addcollegedialog.o
+debug/addprogramdialog.o
+debug/addstudentdialog.o
+debug/connectdb.o
+debug/editcollegedialog.o
+debug/editprogramdialog.o
+debug/editstudentdialog.o
+debug/main.o
+debug/mainwindow.o
+debug/moc_addcollegedialog.o
+debug/moc_addprogramdialog.o
+debug/moc_addstudentdialog.o
+debug/moc_editcollegedialog.o
+debug/moc_editprogramdialog.o
+debug/moc_editstudentdialog.o
+debug/moc_mainwindow.o

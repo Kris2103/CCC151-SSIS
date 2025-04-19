@@ -38,10 +38,44 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "MainWindow"
+        "MainWindow",
+        "refreshStudentTable",
+        "",
+        "refreshProgramTable",
+        "refreshCollegeTable",
+        "on_Add_clicked",
+        "nextStudentPage",
+        "prevStudentPage",
+        "nextProgramPage",
+        "prevProgramPage",
+        "nextCollegePage",
+        "prevCollegePage",
+        "on_Edit_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Slot 'refreshStudentTable'
+        QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'refreshProgramTable'
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'refreshCollegeTable'
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_Add_clicked'
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'nextStudentPage'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'prevStudentPage'
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'nextProgramPage'
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'prevProgramPage'
+        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'nextCollegePage'
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'prevCollegePage'
+        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_Edit_clicked'
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -63,9 +97,22 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<MainWindow *>(_o);
-    (void)_t;
-    (void)_c;
-    (void)_id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: _t->refreshStudentTable(); break;
+        case 1: _t->refreshProgramTable(); break;
+        case 2: _t->refreshCollegeTable(); break;
+        case 3: _t->on_Add_clicked(); break;
+        case 4: _t->nextStudentPage(); break;
+        case 5: _t->prevStudentPage(); break;
+        case 6: _t->nextProgramPage(); break;
+        case 7: _t->prevProgramPage(); break;
+        case 8: _t->nextCollegePage(); break;
+        case 9: _t->prevCollegePage(); break;
+        case 10: _t->on_Edit_clicked(); break;
+        default: ;
+        }
+    }
     (void)_a;
 }
 
@@ -85,6 +132,18 @@ void *MainWindow::qt_metacast(const char *_clname)
 int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QMainWindow::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 11)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 11;
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 11)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 11;
+    }
     return _id;
 }
 QT_WARNING_POP

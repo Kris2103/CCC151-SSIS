@@ -1,0 +1,16 @@
+release/addcollegedialog.o
+release/addprogramdialog.o
+release/addstudentdialog.o
+release/connectdb.o
+release/editcollegedialog.o
+release/editprogramdialog.o
+release/editstudentdialog.o
+release/main.o
+release/mainwindow.o
+release/moc_addcollegedialog.o
+release/moc_addprogramdialog.o
+release/moc_addstudentdialog.o
+release/moc_editcollegedialog.o
+release/moc_editprogramdialog.o
+release/moc_editstudentdialog.o
+release/moc_mainwindow.o

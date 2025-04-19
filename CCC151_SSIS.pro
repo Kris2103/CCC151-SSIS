@@ -9,15 +9,33 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    addcollegedialog.cpp \
+    addprogramdialog.cpp \
+    addstudentdialog.cpp \
     connectdb.cpp \
+    editcollegedialog.cpp \
+    editprogramdialog.cpp \
+    editstudentdialog.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    addcollegedialog.h \
+    addprogramdialog.h \
+    addstudentdialog.h \
     connectdb.h \
+    editcollegedialog.h \
+    editprogramdialog.h \
+    editstudentdialog.h \
     mainwindow.h
 
 FORMS += \
+    addcollegedialog.ui \
+    addprogramdialog.ui \
+    addstudentdialog.ui \
+    editcollegedialog.ui \
+    editprogramdialog.ui \
+    editstudentdialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.
