@@ -15,7 +15,7 @@ AddProgramDialog::AddProgramDialog(QWidget *parent)
 
     QStringList collegeCodes;
     QSqlQuery query;
-    if (!query.exec("SELECT CODE FROM COLLEGE ORDER BY CODE ASC")) {
+    if (!query.exec("SELECT COLLEGE_CODE FROM PROGRAM ORDER BY COLLEGE_CODE ASC")) {
         QMessageBox::critical(this, "Database Error", "Failed to load college codes:\n" + query.lastError().text());
         return;
     }

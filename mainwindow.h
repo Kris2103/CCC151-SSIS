@@ -23,7 +23,7 @@ public:
 
     void insertStudentToDatabase(const QString &id, const QString &firstName, const QString &middleName,
                                  const QString &lastName, int yearLevel, const QString &gender,
-                                 const QString &programCode);  // Declare the function
+                                 const QString &programCode);
 
     void insertProgramToDatabase(const QString &programCode, const QString &programName, const QString &collegeCode);
 
@@ -51,6 +51,13 @@ private slots:
 
     void on_Edit_clicked();
 
+    void on_DeleteButton_clicked();
+    void refreshAllTables();
+
+    void on_Search_clicked();
+
+    void on_RefreshButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -77,6 +84,13 @@ private:
     void loadStudentPage(int page);
     void loadProgramPage(int page);
     void loadCollegePage(int page);
+
+    void deleteStudentFromDatabase(const QString &id);
+    void deleteProgramFromDatabase(const QString &code);
+    void deleteCollegeFromDatabase(const QString &code);
+
+    void replaceNullsInModel(QSqlQueryModel *model, const QString &replaceText);
+    void on_TabTable_currentChanged(int index);
 
 };
 #endif // MAINWINDOW_H

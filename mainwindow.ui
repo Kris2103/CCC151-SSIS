@@ -262,6 +262,19 @@ QPushButton {
       </rect>
      </property>
     </widget>
+    <widget class="QPushButton" name="RefreshButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>93</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Refresh</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="Add">
     <property name="geometry">

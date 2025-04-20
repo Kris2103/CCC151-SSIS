@@ -15,7 +15,7 @@ AddStudentDialog::AddStudentDialog(QWidget *parent)
     connect(ui->CancelStudent, &QPushButton::clicked, this, &QDialog::reject);
 
     QSqlQuery query;
-    if (!query.exec("SELECT CODE FROM PROGRAM ORDER BY CODE ASC")) {
+    if (!query.exec("SELECT PROGRAM_CODE FROM PROGRAM ORDER BY PROGRAM_CODE ASC")) {
         QMessageBox::critical(this, "Database Error", "Failed to load program codes:\n" + query.lastError().text());
         return;
     }

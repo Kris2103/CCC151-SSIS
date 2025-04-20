@@ -47,6 +47,7 @@ public:
     QPushButton *btnPrevCollege;
     QPushButton *DeleteButton;
     QComboBox *Searchby;
+    QPushButton *RefreshButton;
     QPushButton *Add;
     QPushButton *Edit;
     QMenuBar *menubar;
@@ -148,6 +149,9 @@ public:
         Searchby = new QComboBox(frame);
         Searchby->setObjectName("Searchby");
         Searchby->setGeometry(QRect(145, 30, 111, 20));
+        RefreshButton = new QPushButton(frame);
+        RefreshButton->setObjectName("RefreshButton");
+        RefreshButton->setGeometry(QRect(10, 20, 93, 29));
         Add = new QPushButton(centralwidget);
         Add->setObjectName("Add");
         Add->setGeometry(QRect(700, 650, 91, 21));
@@ -217,6 +221,7 @@ public:
         btnPrevCollege->setText(QCoreApplication::translate("MainWindow", "Previous", nullptr));
         TabTable->setTabText(TabTable->indexOf(tab_2), QCoreApplication::translate("MainWindow", "College", nullptr));
         DeleteButton->setText(QCoreApplication::translate("MainWindow", "Delete", nullptr));
+        RefreshButton->setText(QCoreApplication::translate("MainWindow", "Refresh", nullptr));
         Add->setText(QCoreApplication::translate("MainWindow", "Add", nullptr));
         Edit->setText(QCoreApplication::translate("MainWindow", "Edit", nullptr));
     } // retranslateUi

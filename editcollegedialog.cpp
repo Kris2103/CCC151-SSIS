@@ -18,7 +18,7 @@ EditCollegeDialog::~EditCollegeDialog()
 void EditCollegeDialog::setCollegeData(const QString &collegeCode, const QString &collegeName)
 {
     ui->CollegeCodeLine->setText(collegeCode);
-    ui->CollegeCodeLine->setDisabled(true);  // Make it read-only
+    //ui->CollegeCodeLine->setDisabled(false);
     ui->CollegeNameLine->setText(collegeName);
 }
 

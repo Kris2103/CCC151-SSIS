@@ -2,6 +2,10 @@
 #include "ui_editstudentdialog.h"
 #include <QMessageBox>
 #include "mainwindow.h"
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QCompleter>
+#include "mainwindow.h"
 
 
 EditStudentDialog::EditStudentDialog(QWidget *parent)
@@ -9,10 +13,32 @@ EditStudentDialog::EditStudentDialog(QWidget *parent)
     , ui(new Ui::EditStudentDialog)
 {
     ui->setupUi(this);
-    ui->IDline->setReadOnly(true);
+
+    ui->IDline->setReadOnly(false);
 
     connect(ui->UpdateStudent, &QPushButton::clicked, this, &EditStudentDialog::on_UpdateStudent_clicked);
+    connect(ui->CancelStudent, &QPushButton::clicked, this, &QDialog::reject);
 
+    QSqlQuery query;
+    if (!query.exec("SELECT PROGRAM_CODE FROM PROGRAM ORDER BY PROGRAM_CODE ASC")) {
+        QMessageBox::critical(this, "Database Error", "Failed to load program codes:\n" + query.lastError().text());
+        return;
+    }
+
+    QStringList programCodes;
+    while (query.next()) {
+        QString programCode = query.value(0).toString();
+        programCodes << programCode;
+    }
+
+    ui->CourseComboBox->setEditable(true);
+    QCompleter *completer = new QCompleter(programCodes, this);
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
+    completer->setFilterMode(Qt::MatchContains);
+    ui->CourseComboBox->setCompleter(completer);
+
+    ui->CourseComboBox->addItems(programCodes);
+    ui->CourseComboBox->setCurrentIndex(-1);
 }
 
 EditStudentDialog::~EditStudentDialog()
@@ -24,8 +50,6 @@ void EditStudentDialog::setStudentData(const QString &id, const QString &fname, 
                                        int year, const QString &gender, const QString &course)
 {
     ui->IDline->setText(id);
-    ui->IDline->setDisabled(true);
-
     ui->Firstnameline->setText(fname);
     ui->Middlenameline->setText(mname);
     ui->Lastnameline->setText(lname);

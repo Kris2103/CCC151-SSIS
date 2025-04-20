@@ -17,9 +17,13 @@ public:
 
     void setProgramData(const QString &code, const QString &name, const QString &collegeCode);
 
+    QString getProgramCode() const;
     QString getProgramName() const;
     QString getCollegeCode() const;
 
+
+private slots:
+    void on_UpdateProgram_clicked();
 
 private:
     Ui::EditProgramDialog *ui;
