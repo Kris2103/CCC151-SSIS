@@ -101,7 +101,7 @@ QPushButton:hover {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -141,6 +141,19 @@ QPushButton:hover {
        </property>
        <property name="text">
         <string>Previous</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="pageLabel">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>510</y>
+         <width>63</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
        </property>
       </widget>
      </widget>

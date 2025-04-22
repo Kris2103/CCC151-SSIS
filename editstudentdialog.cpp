@@ -14,7 +14,8 @@ EditStudentDialog::EditStudentDialog(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->IDline->setReadOnly(false);
+    ui->IDline->setReadOnly(true);
+    ui->IDline->setEnabled(false);
 
     connect(ui->UpdateStudent, &QPushButton::clicked, this, &EditStudentDialog::on_UpdateStudent_clicked);
     connect(ui->CancelStudent, &QPushButton::clicked, this, &QDialog::reject);
@@ -95,20 +96,5 @@ QString EditStudentDialog::getProgramCode() const
 
 void EditStudentDialog::on_UpdateStudent_clicked()
 {
-    QString id = getID();
-    QString fname = getFirstName();
-    QString mname = getMiddleName();
-    QString lname = getLastName();
-    int year = getYearLevel();
-    QString gender = getGender();
-    QString course = getProgramCode();
-
-    MainWindow *mainWindow = qobject_cast<MainWindow *>(parent());
-    if (mainWindow) {
-        mainWindow->updateStudentInDatabase(id, fname, mname, lname, year, gender, course);
-    } else {
-        QMessageBox::warning(this, "Error", "Unable to access MainWindow.");
-    }
-
     accept();
 }

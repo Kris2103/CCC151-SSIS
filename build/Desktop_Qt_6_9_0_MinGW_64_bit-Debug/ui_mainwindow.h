@@ -14,6 +14,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -37,6 +38,7 @@ public:
     QTableView *StudentTable;
     QPushButton *btnNextStudent;
     QPushButton *btnPrevStudent;
+    QLabel *pageLabel;
     QWidget *tab_3;
     QTableView *ProgTable;
     QPushButton *btnNextProgram;
@@ -108,6 +110,9 @@ public:
         btnPrevStudent = new QPushButton(tab);
         btnPrevStudent->setObjectName("btnPrevStudent");
         btnPrevStudent->setGeometry(QRect(570, 500, 91, 29));
+        pageLabel = new QLabel(tab);
+        pageLabel->setObjectName("pageLabel");
+        pageLabel->setGeometry(QRect(20, 510, 63, 20));
         TabTable->addTab(tab, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName("tab_3");
@@ -201,7 +206,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        TabTable->setCurrentIndex(1);
+        TabTable->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -213,6 +218,7 @@ public:
         Search->setText(QCoreApplication::translate("MainWindow", "Search", nullptr));
         btnNextStudent->setText(QCoreApplication::translate("MainWindow", "Next", nullptr));
         btnPrevStudent->setText(QCoreApplication::translate("MainWindow", "Previous", nullptr));
+        pageLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         TabTable->setTabText(TabTable->indexOf(tab), QCoreApplication::translate("MainWindow", "Students", nullptr));
         btnNextProgram->setText(QCoreApplication::translate("MainWindow", "Next", nullptr));
         btnPrevProgram->setText(QCoreApplication::translate("MainWindow", "Previous", nullptr));

@@ -12,6 +12,12 @@ EditProgramDialog::EditProgramDialog(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->ProgramCodeLine->setReadOnly(true);
+    ui->ProgramCodeLine->setEnabled(false);
+
+    connect(ui->UpdateProgram, &QPushButton::clicked, this, &EditProgramDialog::on_UpdateProgram_clicked);
+    connect(ui->CancelProgram, &QPushButton::clicked, this, &QDialog::reject);
+
     QStringList collegeCodes;
     QSqlQuery query;
     if (!query.exec("SELECT COLLEGE_CODE FROM COLLEGE ORDER BY COLLEGE_CODE ASC")) {
@@ -67,24 +73,5 @@ QString EditProgramDialog::getCollegeCode() const
 
 void EditProgramDialog::on_UpdateProgram_clicked()
 {
-    QString programCode = getProgramCode();
-    QString programName = getProgramName();
-    QString collegeCode = getCollegeCode();
-
-    if (programName.isEmpty()) {
-        QMessageBox::warning(this, "Missing Input", "Program name cannot be empty.");
-        return;
-    }
-
-    if (collegeCode.isEmpty()) {
-        QMessageBox::warning(this, "Missing Input", "Please select a college.");
-        return;
-    }
-
-    MainWindow *mainWindow = qobject_cast<MainWindow *>(parent());
-    if (mainWindow) {
-        mainWindow->updateProgramInDatabase(programCode, programName, collegeCode);
-    }
-
-    accept(); // Close the dialog after update
+    accept();
 }

@@ -8,6 +8,12 @@ EditCollegeDialog::EditCollegeDialog(QWidget *parent)
     , ui(new Ui::EditCollegeDialog)
 {
     ui->setupUi(this);
+
+    ui->CollegeCodeLine->setReadOnly(true);
+    ui->CollegeCodeLine->setEnabled(false);
+
+    connect(ui->UpdateCollege, &QPushButton::clicked, this, &EditCollegeDialog::on_UpdateCollege_clicked);
+    connect(ui->CancelCollege, &QPushButton::clicked, this, &QDialog::reject);
 }
 
 EditCollegeDialog::~EditCollegeDialog()
@@ -18,7 +24,6 @@ EditCollegeDialog::~EditCollegeDialog()
 void EditCollegeDialog::setCollegeData(const QString &collegeCode, const QString &collegeName)
 {
     ui->CollegeCodeLine->setText(collegeCode);
-    //ui->CollegeCodeLine->setDisabled(false);
     ui->CollegeNameLine->setText(collegeName);
 }
 
@@ -34,18 +39,5 @@ QString EditCollegeDialog::getCollegeName() const
 
 void EditCollegeDialog::on_UpdateCollege_clicked()
 {
-    QString code = getCollegeCode();
-    QString name = getCollegeName();
-
-    if (name.isEmpty()) {
-        QMessageBox::warning(this, "Missing Input", "College name cannot be empty.");
-        return;
-    }
-
-    MainWindow *mainWindow = qobject_cast<MainWindow *>(parent());
-    if (mainWindow) {
-        mainWindow->updateCollegeInDatabase(code, name);
-    }
-
-    accept(); // Close the dialog
+    accept();
 }

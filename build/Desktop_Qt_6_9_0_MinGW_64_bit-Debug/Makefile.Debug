@@ -3549,7 +3549,12 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../addcollegedialog.h \
 		../../editstudentdialog.h \
 		../../editprogramdialog.h \
-		../../editcollegedialog.h
+		../../editcollegedialog.h \
+		C:/Qt/6.9.0/mingw_64/include/QtSql/QSqlRecord \
+		C:/Qt/6.9.0/mingw_64/include/QtSql/qsqlrecord.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QStandardItemModel \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/qstandarditemmodel.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QStandardItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\..\mainwindow.cpp
 
 debug/moc_addcollegedialog.o: debug/moc_addcollegedialog.cpp 
