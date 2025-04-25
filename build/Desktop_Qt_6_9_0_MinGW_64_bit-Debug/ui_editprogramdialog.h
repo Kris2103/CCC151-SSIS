@@ -36,7 +36,7 @@ public:
     {
         if (EditProgramDialog->objectName().isEmpty())
             EditProgramDialog->setObjectName("EditProgramDialog");
-        EditProgramDialog->resize(243, 256);
+        EditProgramDialog->resize(227, 256);
         ProgramNameLine = new QLineEdit(EditProgramDialog);
         ProgramNameLine->setObjectName("ProgramNameLine");
         ProgramNameLine->setGeometry(QRect(20, 130, 191, 26));

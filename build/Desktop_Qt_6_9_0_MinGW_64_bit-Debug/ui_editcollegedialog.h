@@ -33,7 +33,7 @@ public:
     {
         if (EditCollegeDialog->objectName().isEmpty())
             EditCollegeDialog->setObjectName("EditCollegeDialog");
-        EditCollegeDialog->resize(225, 208);
+        EditCollegeDialog->resize(225, 210);
         AddCollege = new QLabel(EditCollegeDialog);
         AddCollege->setObjectName("AddCollege");
         AddCollege->setGeometry(QRect(20, 20, 181, 31));

@@ -15,7 +15,7 @@ AddProgramDialog::AddProgramDialog(QWidget *parent)
 
     QStringList collegeCodes;
     QSqlQuery query;
-    if (!query.exec("SELECT COLLEGE_CODE FROM PROGRAM ORDER BY COLLEGE_CODE ASC")) {
+    if (!query.exec("SELECT COLLEGE_CODE FROM COLLEGE ORDER BY COLLEGE_CODE ASC")) {
         QMessageBox::critical(this, "Database Error", "Failed to load college codes:\n" + query.lastError().text());
         return;
     }
@@ -24,7 +24,6 @@ AddProgramDialog::AddProgramDialog(QWidget *parent)
         collegeCodes << query.value(0).toString();
     }
 
-    ui->CollegeCodeComboBox->addItem("");
     ui->CollegeCodeComboBox->addItems(collegeCodes);
 
     ui->CollegeCodeComboBox->setEditable(true);
@@ -32,6 +31,7 @@ AddProgramDialog::AddProgramDialog(QWidget *parent)
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     completer->setFilterMode(Qt::MatchContains); // allows search anywhere in string
     ui->CollegeCodeComboBox->setCompleter(completer);
+     ui->CollegeCodeComboBox->setCurrentIndex(-1);
 
     if (collegeCodes.isEmpty()) {
         QMessageBox::warning(this, "No Colleges Found", "No college codes found in the database. Please add a college first.");

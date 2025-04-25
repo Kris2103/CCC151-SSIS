@@ -34,6 +34,8 @@ AddStudentDialog::AddStudentDialog(QWidget *parent)
 
     ui->CourseComboBox->addItems(programCodes);
     ui->CourseComboBox->setCurrentIndex(-1);
+    ui->Genderline->setCurrentIndex(-1);
+    ui->Yearlevelline->setCurrentIndex(-1);
 }
 
 AddStudentDialog::~AddStudentDialog()

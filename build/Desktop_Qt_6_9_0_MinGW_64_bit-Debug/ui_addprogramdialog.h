@@ -36,7 +36,7 @@ public:
     {
         if (AddProgramDialog->objectName().isEmpty())
             AddProgramDialog->setObjectName("AddProgramDialog");
-        AddProgramDialog->resize(227, 250);
+        AddProgramDialog->resize(227, 245);
         AddProgram = new QLabel(AddProgramDialog);
         AddProgram->setObjectName("AddProgram");
         AddProgram->setGeometry(QRect(20, 10, 181, 31));

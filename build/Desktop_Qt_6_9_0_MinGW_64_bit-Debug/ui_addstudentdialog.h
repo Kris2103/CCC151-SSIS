@@ -44,7 +44,7 @@ public:
     {
         if (AddStudentDialog->objectName().isEmpty())
             AddStudentDialog->setObjectName("AddStudentDialog");
-        AddStudentDialog->resize(359, 351);
+        AddStudentDialog->resize(359, 343);
         IDnumber = new QLabel(AddStudentDialog);
         IDnumber->setObjectName("IDnumber");
         IDnumber->setGeometry(QRect(190, 210, 141, 20));

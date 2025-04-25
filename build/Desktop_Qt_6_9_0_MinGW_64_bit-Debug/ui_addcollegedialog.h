@@ -33,7 +33,7 @@ public:
     {
         if (AddCollegeDialog->objectName().isEmpty())
             AddCollegeDialog->setObjectName("AddCollegeDialog");
-        AddCollegeDialog->resize(241, 243);
+        AddCollegeDialog->resize(241, 212);
         AddCollege_2 = new QPushButton(AddCollegeDialog);
         AddCollege_2->setObjectName("AddCollege_2");
         AddCollege_2->setGeometry(QRect(130, 170, 91, 21));

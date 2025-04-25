@@ -44,7 +44,7 @@ public:
     {
         if (EditStudentDialog->objectName().isEmpty())
             EditStudentDialog->setObjectName("EditStudentDialog");
-        EditStudentDialog->resize(333, 345);
+        EditStudentDialog->resize(340, 351);
         LastName = new QLabel(EditStudentDialog);
         LastName->setObjectName("LastName");
         LastName->setGeometry(QRect(20, 160, 181, 20));

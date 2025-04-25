@@ -18,7 +18,7 @@
 #include <QSqlRecord>
 #include <QStandardItemModel>
 #include <QStandardItem>
-
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -118,8 +118,9 @@ void MainWindow::loadStudentPage(int page) {
     studentQueryModel = new QSqlQueryModel(this);
 
     QStringList columns = {"ID", "FIRST_NAME", "MIDDLE_NAME", "LAST_NAME", "YEAR_LEVEL", "GENDER", "PROGRAM_CODE"};
-    QString query = QString("SELECT ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, YEAR_LEVEL, GENDER, PROGRAM_CODE "
-                            "FROM Students "
+    QString query = QString("SELECT ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, YEAR_LEVEL, GENDER, "
+                            "IFNULL(PROGRAM_CODE, 'Unenrolled') AS PROGRAM_CODE "
+                            "FROM STUDENTS "
                             "ORDER BY %1 %2 "
                             "LIMIT %3 OFFSET %4")
                         .arg(columns.value(studentSortColumn, "ID"))
@@ -144,6 +145,7 @@ void MainWindow::loadStudentPage(int page) {
     ui->StudentTable->setModel(studentQueryModel);
     ui->StudentTable->setSortingEnabled(true);
     ui->StudentTable->horizontalHeader()->setSortIndicator(studentSortColumn, studentSortOrder);
+    ui->StudentTable->verticalHeader()->setVisible(false);
 
     int start = offset + 1;
     int end = offset + studentQueryModel->rowCount();
@@ -153,7 +155,6 @@ void MainWindow::loadStudentPage(int page) {
     ui->btnNextStudent->setEnabled(studentQueryModel->rowCount() == rowsPerPage);
 }
 
-
 void MainWindow::loadProgramPage(int page) {
     int offset = page * rowsPerPage;
     programQueryModel = new QSqlQueryModel(this);
@@ -162,11 +163,15 @@ void MainWindow::loadProgramPage(int page) {
     QString orderBy = columns.value(programSortColumn, "CODE");
     QString order = (programSortOrder == Qt::AscendingOrder) ? "ASC" : "DESC";
 
-    QString query = QString("SELECT PROGRAM_CODE, PROGRAM_NAME, COLLEGE_CODE FROM PROGRAM ORDER BY %1 %2 LIMIT %3 OFFSET %4")
-                        .arg(orderBy)
-                        .arg(order)
-                        .arg(rowsPerPage)
-                        .arg(offset);
+    QString query = QString("SELECT PROGRAM_CODE, PROGRAM_NAME, IFNULL(COLLEGE_CODE, 'Null') AS COLLEGE_CODE "
+                            "FROM PROGRAM "
+                            "ORDER BY %1 %2 "
+                            "LIMIT %3 OFFSET %4"
+                            )
+                            .arg(orderBy)
+                            .arg(order)
+                            .arg(rowsPerPage)
+                            .arg(offset);
 
     programQueryModel->setQuery(query, db);
     programQueryModel->setHeaderData(0, Qt::Horizontal, "Program Code");
@@ -179,6 +184,7 @@ void MainWindow::loadProgramPage(int page) {
     ui->ProgTable->setColumnWidth(0, 115);
     ui->ProgTable->setColumnWidth(2, 100);
     ui->ProgTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+    ui->ProgTable->verticalHeader()->setVisible(false);
 
     ui->btnPrevProgram->setEnabled(currentProgramPage > 0);
     ui->btnNextProgram->setEnabled(programQueryModel->rowCount() == rowsPerPage);
@@ -209,6 +215,7 @@ void MainWindow::loadCollegePage(int page) {
     ui->CollegeTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
     ui->CollegeTable->horizontalHeader()->setStretchLastSection(true);
     ui->CollegeTable->horizontalHeader()->setMinimumSectionSize(150);
+    ui->CollegeTable->verticalHeader()->setVisible(false);
 
     ui->btnPrevCollege->setEnabled(currentCollegePage > 0);
     ui->btnNextCollege->setEnabled(collegeQueryModel->rowCount() == rowsPerPage);
@@ -266,7 +273,7 @@ void MainWindow::insertStudentToDatabase(const QString &id, const QString &fname
 
     // Check if course exists
     QSqlQuery checkProgram(db);
-    checkProgram.prepare("SELECT COUNT(*) FROM PROGRAM WHERE CODE = :code");
+    checkProgram.prepare("SELECT COUNT(*) FROM PROGRAM WHERE PROGRAM_CODE = :code");
     checkProgram.bindValue(":code", course);
     if (!checkProgram.exec() || !checkProgram.next() || checkProgram.value(0).toInt() == 0) {
         QMessageBox::critical(this, "Invalid Program", "The selected program does not exist.");
@@ -288,7 +295,7 @@ void MainWindow::insertStudentToDatabase(const QString &id, const QString &fname
 
     QSqlQuery insert(db);
     insert.prepare(R"(
-        INSERT INTO Students (ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, YEAR_LEVEL, GENDER, PROGRAM_CODE)
+        INSERT INTO STUDENTS (ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, YEAR_LEVEL, GENDER, PROGRAM_CODE)
         VALUES (:id, :fname, :mname, :lname, :year, :gender, :course)
     )");
     insert.bindValue(":id", id);
@@ -306,7 +313,7 @@ void MainWindow::insertStudentToDatabase(const QString &id, const QString &fname
 
     currentStudentPage = 0;
     studentSortColumn = 0;
-    studentSortOrder = Qt::AscendingOrder;
+    studentSortOrder = Qt::DescendingOrder;
     loadStudentPage(currentStudentPage);
 
     QMessageBox::information(this, "Success", "Student successfully added.");
@@ -316,7 +323,7 @@ void MainWindow::insertProgramToDatabase(const QString &programCode, const QStri
 {
     // Check if the college code exists
     QSqlQuery checkCollege(db);
-    checkCollege.prepare("SELECT COUNT(*) FROM COLLEGE WHERE COLLEGECODE = :collegeCode");
+    checkCollege.prepare("SELECT COUNT(*) FROM COLLEGE WHERE COLLEGE_CODE = :collegeCode");
     checkCollege.bindValue(":collegeCode", collegeCode);  // Binding the collegeCode here
     if (!checkCollege.exec() || !checkCollege.next() || checkCollege.value(0).toInt() == 0) {
         QMessageBox::critical(this, "Invalid College Code", "Selected college code does not exist.");
@@ -335,7 +342,7 @@ void MainWindow::insertProgramToDatabase(const QString &programCode, const QStri
     // Insert program into the PROGRAM table
     QSqlQuery insert(db);
     insert.prepare(R"(
-        INSERT INTO PROGRAM (PROGRAM_CODE, PROGRAM_NAME, COLLEGECODE)
+        INSERT INTO PROGRAM (PROGRAM_CODE, PROGRAM_NAME, COLLEGE_CODE)
         VALUES (:programCode, :programName, :collegeCode)
     )");
     insert.bindValue(":programCode", programCode);  // Bind programCode correctly
@@ -350,7 +357,7 @@ void MainWindow::insertProgramToDatabase(const QString &programCode, const QStri
     // After insertion, load the program page again
     currentProgramPage = 0;
     programSortColumn = 0;
-    programSortOrder = Qt::AscendingOrder;
+    programSortOrder = Qt::DescendingOrder;
     loadProgramPage(currentProgramPage);
 
     QMessageBox::information(this, "Success", "Program added successfully.");
@@ -383,7 +390,7 @@ void MainWindow::insertCollegeToDatabase(const QString &code, const QString &nam
 
     currentCollegePage = 0;
     collegeSortColumn = 0;
-    collegeSortOrder = Qt::AscendingOrder;
+    collegeSortOrder = Qt::DescendingOrder;
     loadCollegePage(currentCollegePage);
 
     QMessageBox::information(this, "Success", "College added successfully.");
@@ -431,7 +438,7 @@ void MainWindow::on_Add_clicked()
             QString code = dialog.getProgramCode();
             QString name = dialog.getProgramName();
             QString collegeCode = dialog.getCollegeCode();
-
+            std::cout<< "Add Program works.";
             insertProgramToDatabase(code, name, collegeCode);
         }
     }
@@ -559,6 +566,8 @@ void MainWindow::updateStudentInDatabase(const QString &id, const QString &fname
         return;
     }
 
+    db.commit();
+
     loadStudentPage(currentStudentPage);
     QMessageBox::information(this, "Success", "Student record updated.");
 }
@@ -591,7 +600,6 @@ void MainWindow::updateProgramInDatabase(const QString &programCode, const QStri
         return;
     }
 
-    // Commit the transaction
     db.commit();
 
     loadProgramPage(currentProgramPage);
@@ -620,6 +628,8 @@ void MainWindow::updateCollegeInDatabase(const QString &collegeCode, const QStri
         qDebug() << "Update error (COLLEGE):" << update.lastError().text();
         return;
     }
+
+    db.commit();
 
     loadCollegePage(currentCollegePage);
     QMessageBox::information(this, "Success", "College record updated.");
@@ -693,6 +703,8 @@ void MainWindow::deleteStudentFromDatabase(const QString &id)
         QMessageBox::critical(this, "Delete Error", "Failed to delete the student record.");
         return;
     }
+    loadStudentPage(currentStudentPage);
+    loadProgramPage(currentProgramPage);
 
     db.commit();
 }
@@ -715,6 +727,8 @@ void MainWindow::deleteProgramFromDatabase(const QString &code)
         QMessageBox::critical(this, "Delete Error", "Failed to delete the program record.");
         return;
     }
+    loadStudentPage(currentStudentPage);
+    loadProgramPage(currentProgramPage);
 
     db.commit();
 }
@@ -737,35 +751,16 @@ void MainWindow::deleteCollegeFromDatabase(const QString &code)
         QMessageBox::critical(this, "Delete Error", "Failed to delete the college record.");
         return;
     }
+    loadProgramPage(currentProgramPage);
 
     db.commit();
 }
 
 void MainWindow::refreshAllTables()
 {
-    QSqlQueryModel *studentModel = new QSqlQueryModel(this);
-    studentModel->setQuery("SELECT * FROM STUDENTS");
-
-    replaceNullsInModel(studentModel, "Unenrolled");
-
-    ui->StudentTable->setModel(studentModel);
-    ui->StudentTable->reset();  // Refresh the table view
-
-    QSqlQueryModel *programModel = new QSqlQueryModel(this);
-    programModel->setQuery("SELECT * FROM PROGRAM");
-
-    replaceNullsInModel(programModel, "Null");
-
-    ui->ProgTable->setModel(programModel);
-    ui->ProgTable->reset();  // Refresh the table view
-
-    QSqlQueryModel *collegeModel = new QSqlQueryModel(this);
-    collegeModel->setQuery("SELECT * FROM COLLEGE");
-
-    replaceNullsInModel(collegeModel, "Null");
-
-    ui->CollegeTable->setModel(collegeModel);
-    ui->CollegeTable->reset();  // Refresh the table view
+    loadStudentPage(currentStudentPage);
+    loadProgramPage(currentProgramPage);
+    loadCollegePage(currentCollegePage);
 }
 
 
@@ -918,22 +913,11 @@ void MainWindow::on_TabTable_currentChanged(int index)
     ui->Searchby->setCurrentIndex(0);
 }
 
-
 void MainWindow::on_RefreshButton_clicked()
 {
-    QSqlQuery query(db);
+    loadStudentPage(currentStudentPage);
+    loadProgramPage(currentProgramPage);
+    loadCollegePage(currentCollegePage);
 
-    query.exec("SELECT * FROM STUDENTS");
-    studentQueryModel->setQuery(query.lastQuery(), db);
-
-    query.exec("SELECT * FROM PROGRAM");
-    programQueryModel->setQuery(query.lastQuery(), db);
-
-    query.exec("SELECT * FROM COLLEGE");
-    collegeQueryModel->setQuery(query.lastQuery(), db);
-
-    ui->StudentTable->setModel(studentQueryModel);
-    ui->ProgTable->setModel(programQueryModel);
-    ui->CollegeTable->setModel(collegeQueryModel);
+    ui->SearchLine->clear();
 }
-

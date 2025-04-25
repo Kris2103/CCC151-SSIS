@@ -59,12 +59,12 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(824, 735);
+        MainWindow->resize(824, 716);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         frame = new QFrame(centralwidget);
         frame->setObjectName("frame");
-        frame->setGeometry(QRect(20, 20, 771, 621));
+        frame->setGeometry(QRect(20, 20, 781, 611));
         frame->setFrameShape(QFrame::Shape::StyledPanel);
         frame->setFrameShadow(QFrame::Shadow::Raised);
         SearchLine = new QLineEdit(frame);
@@ -97,7 +97,7 @@ public:
 "}"));
         TabTable = new QTabWidget(frame);
         TabTable->setObjectName("TabTable");
-        TabTable->setGeometry(QRect(10, 50, 761, 571));
+        TabTable->setGeometry(QRect(10, 50, 761, 561));
         TabTable->setStyleSheet(QString::fromUtf8(""));
         tab = new QWidget();
         tab->setObjectName("tab");
@@ -159,7 +159,7 @@ public:
         RefreshButton->setGeometry(QRect(10, 20, 93, 29));
         Add = new QPushButton(centralwidget);
         Add->setObjectName("Add");
-        Add->setGeometry(QRect(700, 650, 91, 21));
+        Add->setGeometry(QRect(700, 640, 91, 21));
         Add->setMinimumSize(QSize(91, 20));
         Add->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #00674F;\n"
@@ -178,7 +178,7 @@ public:
 "}"));
         Edit = new QPushButton(centralwidget);
         Edit->setObjectName("Edit");
-        Edit->setGeometry(QRect(600, 650, 91, 21));
+        Edit->setGeometry(QRect(600, 640, 91, 21));
         Edit->setMinimumSize(QSize(91, 20));
         Edit->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #00674F;\n"

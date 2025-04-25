@@ -29,7 +29,7 @@ EditProgramDialog::EditProgramDialog(QWidget *parent)
         collegeCodes << query.value(0).toString();
     }
 
-    ui->CollegeCodeComboBox->addItem("");
+    //ui->CollegeCodeComboBox->addItem("");
     ui->CollegeCodeComboBox->addItems(collegeCodes);
     ui->CollegeCodeComboBox->setEditable(true);
 
