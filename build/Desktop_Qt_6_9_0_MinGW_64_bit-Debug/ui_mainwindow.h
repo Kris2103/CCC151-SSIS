@@ -43,10 +43,12 @@ public:
     QTableView *ProgTable;
     QPushButton *btnNextProgram;
     QPushButton *btnPrevProgram;
+    QLabel *pageLabel_2;
     QWidget *tab_2;
     QTableView *CollegeTable;
     QPushButton *btnNextCollege;
     QPushButton *btnPrevCollege;
+    QLabel *pageLabel_3;
     QPushButton *DeleteButton;
     QComboBox *Searchby;
     QPushButton *RefreshButton;
@@ -64,7 +66,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         frame = new QFrame(centralwidget);
         frame->setObjectName("frame");
-        frame->setGeometry(QRect(20, 20, 781, 611));
+        frame->setGeometry(QRect(20, 20, 781, 621));
         frame->setFrameShape(QFrame::Shape::StyledPanel);
         frame->setFrameShadow(QFrame::Shadow::Raised);
         SearchLine = new QLineEdit(frame);
@@ -112,7 +114,7 @@ public:
         btnPrevStudent->setGeometry(QRect(570, 500, 91, 29));
         pageLabel = new QLabel(tab);
         pageLabel->setObjectName("pageLabel");
-        pageLabel->setGeometry(QRect(20, 510, 63, 20));
+        pageLabel->setGeometry(QRect(30, 500, 151, 20));
         TabTable->addTab(tab, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName("tab_3");
@@ -125,6 +127,9 @@ public:
         btnPrevProgram = new QPushButton(tab_3);
         btnPrevProgram->setObjectName("btnPrevProgram");
         btnPrevProgram->setGeometry(QRect(570, 500, 91, 29));
+        pageLabel_2 = new QLabel(tab_3);
+        pageLabel_2->setObjectName("pageLabel_2");
+        pageLabel_2->setGeometry(QRect(30, 500, 161, 20));
         TabTable->addTab(tab_3, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName("tab_2");
@@ -137,6 +142,9 @@ public:
         btnPrevCollege = new QPushButton(tab_2);
         btnPrevCollege->setObjectName("btnPrevCollege");
         btnPrevCollege->setGeometry(QRect(570, 500, 91, 29));
+        pageLabel_3 = new QLabel(tab_2);
+        pageLabel_3->setObjectName("pageLabel_3");
+        pageLabel_3->setGeometry(QRect(30, 500, 161, 20));
         TabTable->addTab(tab_2, QString());
         DeleteButton = new QPushButton(frame);
         DeleteButton->setObjectName("DeleteButton");
@@ -206,7 +214,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        TabTable->setCurrentIndex(0);
+        TabTable->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -222,9 +230,11 @@ public:
         TabTable->setTabText(TabTable->indexOf(tab), QCoreApplication::translate("MainWindow", "Students", nullptr));
         btnNextProgram->setText(QCoreApplication::translate("MainWindow", "Next", nullptr));
         btnPrevProgram->setText(QCoreApplication::translate("MainWindow", "Previous", nullptr));
+        pageLabel_2->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         TabTable->setTabText(TabTable->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Program", nullptr));
         btnNextCollege->setText(QCoreApplication::translate("MainWindow", "Next", nullptr));
         btnPrevCollege->setText(QCoreApplication::translate("MainWindow", "Previous", nullptr));
+        pageLabel_3->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         TabTable->setTabText(TabTable->indexOf(tab_2), QCoreApplication::translate("MainWindow", "College", nullptr));
         DeleteButton->setText(QCoreApplication::translate("MainWindow", "Delete", nullptr));
         RefreshButton->setText(QCoreApplication::translate("MainWindow", "Refresh", nullptr));

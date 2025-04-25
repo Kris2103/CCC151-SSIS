@@ -20,7 +20,7 @@
       <x>20</x>
       <y>20</y>
       <width>781</width>
-      <height>611</height>
+      <height>621</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -101,7 +101,7 @@ QPushButton:hover {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -146,9 +146,9 @@ QPushButton:hover {
       <widget class="QLabel" name="pageLabel">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>510</y>
-         <width>63</width>
+         <x>30</x>
+         <y>500</y>
+         <width>151</width>
          <height>20</height>
         </rect>
        </property>
@@ -197,6 +197,19 @@ QPushButton:hover {
         <string>Previous</string>
        </property>
       </widget>
+      <widget class="QLabel" name="pageLabel_2">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>500</y>
+         <width>161</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
@@ -236,6 +249,19 @@ QPushButton:hover {
        </property>
        <property name="text">
         <string>Previous</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="pageLabel_3">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>500</y>
+         <width>161</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
        </property>
       </widget>
      </widget>

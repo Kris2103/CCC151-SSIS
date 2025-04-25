@@ -113,6 +113,18 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::loadStudentPage(int page) {
+    QSqlQuery countQuery("SELECT COUNT(*) FROM STUDENTS", db);
+    int totalStudents = 0;
+    if (countQuery.next()) {
+        totalStudents = countQuery.value(0).toInt();
+    }
+
+    int maxPage = (totalStudents + rowsPerPage - 1) / rowsPerPage - 1;
+    if (page > maxPage) {
+        page = maxPage;
+    }
+    currentStudentPage = page;
+
     int offset = page * rowsPerPage;
 
     studentQueryModel = new QSqlQueryModel(this);
@@ -134,7 +146,7 @@ void MainWindow::loadStudentPage(int page) {
         qDebug() << "Query Error: " << studentQueryModel->lastError().text();
     }
 
-    studentQueryModel->setHeaderData(0, Qt::Horizontal, "ID Number");
+    studentQueryModel->setHeaderData(0, Qt::Horizontal, "ID");
     studentQueryModel->setHeaderData(1, Qt::Horizontal, "First Name");
     studentQueryModel->setHeaderData(2, Qt::Horizontal, "Middle Name");
     studentQueryModel->setHeaderData(3, Qt::Horizontal, "Last Name");
@@ -149,6 +161,10 @@ void MainWindow::loadStudentPage(int page) {
 
     int start = offset + 1;
     int end = offset + studentQueryModel->rowCount();
+
+    if (end > totalStudents) {
+        end = totalStudents;
+    }
     ui->pageLabel->setText(QString("Page %1: %2 - %3").arg(page + 1).arg(start).arg(end));
 
     ui->btnPrevStudent->setEnabled(currentStudentPage > 0);
@@ -156,6 +172,18 @@ void MainWindow::loadStudentPage(int page) {
 }
 
 void MainWindow::loadProgramPage(int page) {
+    QSqlQuery countQuery("SELECT COUNT(*) FROM PROGRAM", db);
+    int totalPrograms = 0;
+    if (countQuery.next()) {
+        totalPrograms = countQuery.value(0).toInt();
+    }
+
+    int maxPage = (totalPrograms + rowsPerPage - 1) / rowsPerPage - 1;
+    if (page > maxPage) {
+        page = maxPage;
+    }
+    currentProgramPage = page;
+
     int offset = page * rowsPerPage;
     programQueryModel = new QSqlQueryModel(this);
 
@@ -186,11 +214,33 @@ void MainWindow::loadProgramPage(int page) {
     ui->ProgTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
     ui->ProgTable->verticalHeader()->setVisible(false);
 
+    int start = offset + 1;
+    int end = offset + programQueryModel->rowCount();
+
+    if (end > totalPrograms) {
+        end = totalPrograms;
+    }
+
+    ui->pageLabel_2->setText(QString("Page %1: %2 - %3").arg(page + 1).arg(start).arg(end));
+
     ui->btnPrevProgram->setEnabled(currentProgramPage > 0);
     ui->btnNextProgram->setEnabled(programQueryModel->rowCount() == rowsPerPage);
 }
 
 void MainWindow::loadCollegePage(int page) {
+    QSqlQuery countQuery("SELECT COUNT(*) FROM COLLEGE", db);
+    int totalColleges = 0;
+    if (countQuery.next()) {
+        totalColleges = countQuery.value(0).toInt();
+    }
+
+    // Calculate the maximum page
+    int maxPage = (totalColleges + rowsPerPage - 1) / rowsPerPage - 1;
+    if (page > maxPage) {
+        page = maxPage;
+    }
+    currentCollegePage = page;
+
     int offset = page * rowsPerPage;
     collegeQueryModel = new QSqlQueryModel(this);
 
@@ -216,6 +266,15 @@ void MainWindow::loadCollegePage(int page) {
     ui->CollegeTable->horizontalHeader()->setStretchLastSection(true);
     ui->CollegeTable->horizontalHeader()->setMinimumSectionSize(150);
     ui->CollegeTable->verticalHeader()->setVisible(false);
+
+    int start = offset + 1;
+    int end = offset + collegeQueryModel->rowCount();
+
+    if (end > totalColleges) {
+        end = totalColleges;
+    }
+
+    ui->pageLabel_3->setText(QString("Page %1: %2 - %3").arg(page + 1).arg(start).arg(end));
 
     ui->btnPrevCollege->setEnabled(currentCollegePage > 0);
     ui->btnNextCollege->setEnabled(collegeQueryModel->rowCount() == rowsPerPage);
@@ -810,7 +869,7 @@ void MainWindow::on_Search_clicked()
                        "OR YEAR_LEVEL LIKE :searchTerm "
                        "OR GENDER LIKE :searchTerm "
                        "OR PROGRAM_CODE LIKE :searchTerm";
-        } else if (searchField == "I.D. Number") {
+        } else if (searchField == "ID") {
             sqlQuery = "SELECT * FROM STUDENTS WHERE ID LIKE :searchTerm";
         } else if (searchField == "First Name") {
             sqlQuery = "SELECT * FROM STUDENTS WHERE FIRST_NAME LIKE :searchTerm";
@@ -896,7 +955,7 @@ void MainWindow::on_TabTable_currentChanged(int index)
 
     if (index == 0) { // Student Tab
         ui->Searchby->addItems({
-            "All Fields", "ID Number", "First Name", "Middle Name",
+            "All Fields", "ID", "First Name", "Middle Name",
             "Last Name", "Year Level", "Gender", "Program Code"
         });
     }
