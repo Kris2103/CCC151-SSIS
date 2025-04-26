@@ -161,7 +161,7 @@ public:
 "}"));
         Searchby = new QComboBox(frame);
         Searchby->setObjectName("Searchby");
-        Searchby->setGeometry(QRect(145, 30, 111, 20));
+        Searchby->setGeometry(QRect(125, 30, 131, 20));
         RefreshButton = new QPushButton(frame);
         RefreshButton->setObjectName("RefreshButton");
         RefreshButton->setGeometry(QRect(10, 20, 93, 29));

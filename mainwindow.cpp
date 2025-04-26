@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Initialize the search mode to false
+    isSearchMode = false;
+
     QString dbPath = "C:/Users/Kristelle/Documents/Database/CCC151_Database.db";
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(dbPath);
@@ -72,17 +75,29 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->StudentTable->horizontalHeader(), &QHeaderView::sectionClicked, this, [=](int logicalIndex){
         studentSortColumn = logicalIndex;
         studentSortOrder = (studentSortOrder == Qt::AscendingOrder) ? Qt::DescendingOrder : Qt::AscendingOrder;
-        loadStudentPage(currentStudentPage);
+        if (isSearchMode) {
+            on_Search_clicked();
+        } else {
+            loadStudentPage(currentStudentPage);
+        }
     });
     connect(ui->ProgTable->horizontalHeader(), &QHeaderView::sectionClicked, this, [=](int logicalIndex){
         programSortColumn = logicalIndex;
         programSortOrder = (programSortOrder == Qt::AscendingOrder) ? Qt::DescendingOrder : Qt::AscendingOrder;
-        loadProgramPage(currentProgramPage);
+        if (isSearchMode) {
+            on_Search_clicked();
+        } else {
+            loadProgramPage(currentProgramPage);
+        }
     });
     connect(ui->CollegeTable->horizontalHeader(), &QHeaderView::sectionClicked, this, [=](int logicalIndex){
         collegeSortColumn = logicalIndex;
         collegeSortOrder = (collegeSortOrder == Qt::AscendingOrder) ? Qt::DescendingOrder : Qt::AscendingOrder;
-        loadCollegePage(currentCollegePage);
+        if (isSearchMode) {
+            on_Search_clicked();
+        } else {
+            loadCollegePage(currentCollegePage);
+        }
     });
 
     // Tab setup
@@ -822,29 +837,16 @@ void MainWindow::refreshAllTables()
     loadCollegePage(currentCollegePage);
 }
 
-
-void MainWindow::replaceNullsInModel(QSqlQueryModel *model, const QString &replaceText)
-{
-    for (int row = 0; row < model->rowCount(); ++row) {
-        for (int col = 0; col < model->columnCount(); ++col) {
-            QVariant cellData = model->data(model->index(row, col));
-
-            if (cellData.isNull() || cellData.toString().isEmpty()) {
-                model->setData(model->index(row, col), replaceText);
-            }
-        }
-    }
-}
-
 void MainWindow::on_Search_clicked()
 {
     QString searchTerm = ui->SearchLine->text().trimmed();
     QString searchField = ui->Searchby->currentText();
 
     if (searchTerm.isEmpty()) {
-        loadStudentPage(0);  // Reload all student data
-        loadProgramPage(0);  // Reload all program data
-        loadCollegePage(0);  // Reload all college data
+        isSearchMode = false;
+        loadStudentPage(0);
+        loadProgramPage(0);
+        loadCollegePage(0);
 
         ui->StudentTable->setModel(studentQueryModel);
         ui->ProgTable->setModel(programQueryModel);
@@ -854,100 +856,133 @@ void MainWindow::on_Search_clicked()
         return;
     }
 
-    bool found = false;
-    QSqlQuery query;
     QString sqlQuery;
-
     int currentTabIndex = ui->TabTable->currentIndex();
+
+    QMap<QString, QString> fieldNameMapping = {
+        {"ID", "ID"},
+        {"FIRST_NAME", "First Name"},
+        {"MIDDLE_NAME", "Middle Name"},
+        {"LAST_NAME", "Last Name"},
+        {"YEAR_LEVEL", "Year Level"},
+        {"GENDER", "Gender"},
+        {"PROGRAM_CODE", "Program Code"},
+        {"PROGRAM_NAME", "Program Name"},
+        {"COLLEGE_CODE", "College Code"},
+        {"COLLEGE_NAME", "College Name"}
+    };
+
+    QString likeTerm = "%" + searchTerm + "%";
 
     if (currentTabIndex == 0) {  // Student Tab
         if (searchField == "All Fields") {
-            sqlQuery = "SELECT * FROM STUDENTS WHERE ID LIKE :searchTerm "
-                       "OR FIRST_NAME LIKE :searchTerm "
-                       "OR MIDDLE_NAME LIKE :searchTerm "
-                       "OR LAST_NAME LIKE :searchTerm "
-                       "OR YEAR_LEVEL LIKE :searchTerm "
-                       "OR GENDER LIKE :searchTerm "
-                       "OR PROGRAM_CODE LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM STUDENTS WHERE "
+                               "ID LIKE '%1' OR "
+                               "FIRST_NAME LIKE '%1' OR "
+                               "MIDDLE_NAME LIKE '%1' OR "
+                               "LAST_NAME LIKE '%1' OR "
+                               "YEAR_LEVEL LIKE '%1' OR "
+                               "GENDER LIKE '%1' OR "
+                               "PROGRAM_CODE LIKE '%1'").arg(likeTerm);
         } else if (searchField == "ID") {
-            sqlQuery = "SELECT * FROM STUDENTS WHERE ID LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM STUDENTS WHERE ID LIKE '%1'").arg(likeTerm);
         } else if (searchField == "First Name") {
-            sqlQuery = "SELECT * FROM STUDENTS WHERE FIRST_NAME LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM STUDENTS WHERE FIRST_NAME LIKE '%1'").arg(likeTerm);
         } else if (searchField == "Middle Name") {
-            sqlQuery = "SELECT * FROM STUDENTS WHERE MIDDLE_NAME LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM STUDENTS WHERE MIDDLE_NAME LIKE '%1'").arg(likeTerm);
         } else if (searchField == "Last Name") {
-            sqlQuery = "SELECT * FROM STUDENTS WHERE LAST_NAME LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM STUDENTS WHERE LAST_NAME LIKE '%1'").arg(likeTerm);
         } else if (searchField == "Year Level") {
-            sqlQuery = "SELECT * FROM STUDENTS WHERE YEAR_LEVEL LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM STUDENTS WHERE YEAR_LEVEL LIKE '%1'").arg(likeTerm);
         } else if (searchField == "Gender") {
-            sqlQuery = "SELECT * FROM STUDENTS WHERE GENDER LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM STUDENTS WHERE GENDER LIKE '%1'").arg(likeTerm);
         } else if (searchField == "Program Code") {
-            sqlQuery = "SELECT * FROM STUDENTS WHERE PROGRAM_CODE LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM STUDENTS WHERE PROGRAM_CODE LIKE '%1'").arg(likeTerm);
         }
     }
     else if (currentTabIndex == 1) {  // Program Tab
         if (searchField == "All Fields") {
-            sqlQuery = "SELECT * FROM PROGRAM WHERE PROGRAM_CODE LIKE :searchTerm "
-                       "OR PROGRAM_NAME LIKE :searchTerm "
-                       "OR COLLEGE_CODE LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM PROGRAM WHERE "
+                               "PROGRAM_CODE LIKE '%1' OR "
+                               "PROGRAM_NAME LIKE '%1' OR "
+                               "COLLEGE_CODE LIKE '%1'").arg(likeTerm);
         } else if (searchField == "Program Code") {
-            sqlQuery = "SELECT * FROM PROGRAM WHERE PROGRAM_CODE LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM PROGRAM WHERE PROGRAM_CODE LIKE '%1'").arg(likeTerm);
         } else if (searchField == "Program Name") {
-            sqlQuery = "SELECT * FROM PROGRAM WHERE PROGRAM_NAME LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM PROGRAM WHERE PROGRAM_NAME LIKE '%1'").arg(likeTerm);
         } else if (searchField == "College Code") {
-            sqlQuery = "SELECT * FROM PROGRAM WHERE COLLEGE_CODE LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM PROGRAM WHERE COLLEGE_CODE LIKE '%1'").arg(likeTerm);
         }
     }
     else if (currentTabIndex == 2) {  // College Tab
         if (searchField == "All Fields") {
-            sqlQuery = "SELECT * FROM COLLEGE WHERE COLLEGE_CODE LIKE :searchTerm "
-                       "OR COLLEGE_NAME LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM COLLEGE WHERE "
+                               "COLLEGE_CODE LIKE '%1' OR "
+                               "COLLEGE_NAME LIKE '%1'").arg(likeTerm);
         } else if (searchField == "College Code") {
-            sqlQuery = "SELECT * FROM COLLEGE WHERE COLLEGE_CODE LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM COLLEGE WHERE COLLEGE_CODE LIKE '%1'").arg(likeTerm);
         } else if (searchField == "College Name") {
-            sqlQuery = "SELECT * FROM COLLEGE WHERE COLLEGE_NAME LIKE :searchTerm";
+            sqlQuery = QString("SELECT * FROM COLLEGE WHERE COLLEGE_NAME LIKE '%1'").arg(likeTerm);
         }
     }
+    isSearchMode = true;
 
-    query.prepare(sqlQuery);
-    query.bindValue(":searchTerm", "%" + searchTerm + "%");
+    QSqlQuery query;
+    if (!query.exec(sqlQuery)) {
+        QMessageBox::warning(this, "Search Error", "Failed to execute search: " + query.lastError().text());
+        return;
+    }
 
-    if (query.exec()) {
-        found = true;
+    QStandardItemModel *model = new QStandardItemModel(this);
+    QSqlRecord record = query.record();
+    int columnCount = record.count();
+    model->setColumnCount(columnCount);
 
-        QStandardItemModel *model = new QStandardItemModel(this);
-        QSqlRecord record = query.record();
-        int columnCount = record.count();
-        model->setColumnCount(columnCount);
+    for (int i = 0; i < columnCount; ++i) {
+        QString fieldName = record.fieldName(i);
+        QString header = fieldNameMapping.contains(fieldName) ? fieldNameMapping[fieldName] : fieldName;
+        model->setHeaderData(i, Qt::Horizontal, header);
+    }
 
+    while (query.next()) {
+        QList<QStandardItem*> rowItems;
         for (int i = 0; i < columnCount; ++i) {
-            model->setHeaderData(i, Qt::Horizontal, record.fieldName(i));
-        }
+            QVariant value = query.value(i);
 
-        while (query.next()) {
-            QList<QStandardItem*> rowItems;
-            for (int i = 0; i < columnCount; ++i) {
-                QStandardItem *item = new QStandardItem(query.value(i).toString());
-                rowItems.append(item);
+            QString fieldName = record.fieldName(i);
+            QString displayValue = value.toString();
+
+            // SPECIAL CASES:
+            if (currentTabIndex == 0 && fieldName == "PROGRAM_CODE") {  // Student tab
+                if (value.isNull() || displayValue.isEmpty()) {
+                    displayValue = "Unenrolled";
+                }
             }
-            model->appendRow(rowItems);
-        }
+            if (currentTabIndex == 1 && fieldName == "COLLEGE_CODE") {  // Program tab
+                if (value.isNull() || displayValue.isEmpty()) {
+                    displayValue = "Null";
+                }
+            }
 
-        if (currentTabIndex == 0) {
-            ui->StudentTable->setModel(model);
-        } else if (currentTabIndex == 1) {
-            ui->ProgTable->setModel(model);
-        } else if (currentTabIndex == 2) {
-            ui->CollegeTable->setModel(model);
+            QStandardItem *item = new QStandardItem(displayValue);
+            rowItems.append(item);
         }
-    } else {
-        QMessageBox::warning(this, "Search", "Failed to execute search query: " + query.lastError().text());
+        model->appendRow(rowItems);
     }
 
-    if (!found) {
-        QMessageBox::information(this, "Search", "No matching records found based on the selected search field.");
+    // Set model
+    if (currentTabIndex == 0) {
+        ui->StudentTable->setModel(model);
+        ui->StudentTable->setSortingEnabled(true);
+    } else if (currentTabIndex == 1) {
+        ui->ProgTable->setModel(model);
+        ui->ProgTable->setSortingEnabled(true);
+    } else if (currentTabIndex == 2) {
+        ui->CollegeTable->setModel(model);
+        ui->CollegeTable->setSortingEnabled(true);
     }
 }
+
 
 void MainWindow::on_TabTable_currentChanged(int index)
 {
@@ -979,4 +1014,5 @@ void MainWindow::on_RefreshButton_clicked()
     loadCollegePage(currentCollegePage);
 
     ui->SearchLine->clear();
+    QMessageBox::information(this, "Refresh", "All data has been reloaded.");
 }

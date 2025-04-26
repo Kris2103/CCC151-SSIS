@@ -81,6 +81,9 @@ private:
     Qt::SortOrder programSortOrder;
     Qt::SortOrder collegeSortOrder;
 
+    bool isSearchMode;
+    int currentSearchPage = 0;
+
     void loadStudentPage(int page);
     void loadProgramPage(int page);
     void loadCollegePage(int page);
@@ -89,7 +92,6 @@ private:
     void deleteProgramFromDatabase(const QString &code);
     void deleteCollegeFromDatabase(const QString &code);
 
-    void replaceNullsInModel(QSqlQueryModel *model, const QString &replaceText);
     void on_TabTable_currentChanged(int index);
 
 };
