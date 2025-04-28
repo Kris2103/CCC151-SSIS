@@ -189,7 +189,7 @@ public:
         Edit->setGeometry(QRect(600, 640, 91, 21));
         Edit->setMinimumSize(QSize(91, 20));
         Edit->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"    background-color: #00674F;\n"
+"    background-color: #1565C0;\n"
 "    color: white;\n"
 "    border: 2px solid #000000;\n"
 "    border-radius: 5px;\n"
